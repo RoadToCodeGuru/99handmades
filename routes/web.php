@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\MakeSetController;
+use App\Http\Controllers\ItemSetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +22,10 @@ Route::get('/', function () {
     return redirect('/item');
 });
 
+
+Route::get('/invoice_test', function () {
+    return view('invoice_test');
+});
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return view('admin.items.index');
 // })->name('dashboard');
@@ -39,4 +45,21 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('subcategory/{id}', [SubCategoryController::class, 'edit']);
     Route::post('create_subcategory', [SubCategoryController::class, 'store']);
     Route::post('delete_subcategory', [SubCategoryController::class, 'destroy']);
+
+    Route::get('makeset', [MakeSetController::class, 'index']);
+    Route::get('makeset/{id}', [MakeSetController::class, 'edit']);
+    Route::post('create_makeset', [MakeSetController::class, 'store']);
+    Route::post('delete_makeset', [MakeSetController::class, 'destroy']);
+
+    Route::get('invoice', [MakeSetController::class, 'invoice']);
+    Route::get('set_detail/{id}', [MakeSetController::class, 'set_detail']);
+
+    Route::get('itemset', [ItemSetController::class, 'index']);
+    Route::get('itemset/{id}', [ItemSetController::class, 'edit']);
+    Route::post('create_itemset', [ItemSetController::class, 'store']);
+    Route::post('edit_itemset', [ItemSetController::class, 'update']);
+    Route::post('delete_itemset', [ItemSetController::class, 'destroy']);
+
+    Route::post('import_itemset', [ItemSetController::class, 'import']);
+    Route::post('empty_itemset', [ItemSetController::class, 'empty']);
 });

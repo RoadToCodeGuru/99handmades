@@ -33,8 +33,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Category</h4>
-                                <h6 class="card-subtitle">category lists</h6>
+                                <h4 class="card-title">Item</h4>
+                                <h6 class="card-subtitle">items lists</h6>
                                 <a href="javascript:void(0)" id="create-new-item" class="btn btn-outline-success btn-rounded float-right" data-toggle="modal" data-target="#create-item" data-whatever="@mdo"><i class="ti-plus pr-1"></i>Create Item</a>
                                 <div class="table-responsive m-t-40">
                                     <table id="laravel_datatable" class="table w-100 table-bordered table-striped">
@@ -80,7 +80,7 @@
                                     <div class="form-group col-md-6 ">
                                         <label class="col-sm-4 control-label">Item Category</label>
                                         <div class="col-sm-12">
-                                        <select id="category_id" name="category_id" class="form-control sub_category_id" style="width: 100%">
+                                        <select id="category_id" name="category_id" class="form-control select2" style="width: 100%">
                                                     @foreach($category as $cat)
                                                     <option value="{{$cat->id}}">{{ $cat->category_name }}</option>
                                                     @endforeach
@@ -91,7 +91,7 @@
                                     <div class="form-group col-md-6 ">
                                         <label class="col-sm-4 control-label">Item Sub-Category</label>
                                         <div class="col-sm-12">
-                                        <select id="sub_category_id" name="sub_category_id" class="form-control sub_category_id" style="width: 100%">
+                                        <select id="sub_category_id" name="sub_category_id" class="form-control select2" style="width: 100%">
                                                     @foreach($sub_category as $sub_cat)
                                                     <option value="{{$sub_cat->id}}" value1="{{ $sub_cat->category_id }}">{{ $sub_cat->sub_category_name }}</option>
                                                     @endforeach
@@ -211,10 +211,10 @@ $(document).ready( function () {
         $(".dropify-clear").trigger("click");
         $('#btn-save').text("Create");
         $('#item_id').val('');
-        $('#categoryForm').trigger("reset");
+        $('#itemForm').trigger("reset");
         $('#category_id').val('').change(); 
         $("#sub_category_id").val('').change();
-        $('#categoryCrudModal').text("Create Item");
+        $('#itemCrudModal').text("Create Item");
         $('#ajax-item-modal').modal('show');
     });
   

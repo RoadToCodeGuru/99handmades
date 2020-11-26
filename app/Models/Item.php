@@ -20,4 +20,9 @@ class Item extends Model
     {
         return $this->belongsTo('App\Models\SubCategory', 'subcategory_id');
     }
+
+    public function makeset()
+    {
+        return $this->hasOne('App\Models\MakeSet', 'item_id', 'item_id');
+    }
 }
