@@ -53,7 +53,7 @@
                                             <a href="javascript:void(0)" id="approve_set" class="btn btn-sm mb-2 btn-warning btn-rounded mr-2" data-toggle="modal" data-whatever="@mdo">Create</a>
                                             <a href="javascript:void(0)" id="import_set" class="btn btn-sm mb-2 btn-success btn-rounded mr-2" data-toggle="modal" data-whatever="@mdo">Import</a>
                                             <a href="javascript:void(0)" id="update_set" class="btn btn-sm mb-2 btn-info btn-rounded mr-2" data-toggle="modal" data-whatever="@mdo">Edit</a>
-                                            <a href="/invoice" class="btn btn-sm mb-2 btn-primary btn-rounded mr-2">Invoice</a>
+                                            <a href="javascript:void(0)" id="invoice" class="btn btn-sm mb-2 btn-primary btn-rounded mr-2" data-toggle="modal" data-whatever="@mdo">Invoice</a>
                                             <a href="javascript:void(0)" id="empty_set" class="btn btn-sm mb-2 btn-danger btn-rounded mr-2" data-toggle="modal" data-whatever="@mdo">Empty</a>
                                             <a href="/itemset" class="btn btn-sm mb-2 btn-secondary btn-rounded">Item Sets List</a>
                                             <h5 class="mt-4" id="sub_total"></h5>
@@ -170,6 +170,63 @@
 
                                     <div class="col-sm-offset-2 col-sm-10">
                                     <button type="submit" class="btn btn-primary" id="btn-itemset" value="create">Save changes
+                                    </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="ajax-invoice-modal" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title" id="invoiceCrudModal"></h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/invoice" id="invoiceForm" name="invoiceForm" class="form-horizontal">
+
+                                    <div class="form-group">
+                                        <label for="customer_name" class="col-sm-4 control-label">Name</label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control" id="customer_name" name="customer_name"  value="" maxlength="50">
+                                            <span class="text-danger error-tags customer_name-error"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="phone_number" class="col-sm-4 control-label">Phone Number</label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control" id="phone_number" name="phone_number"  value="" maxlength="50">
+                                            <span class="text-danger error-tags phone_number-error"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="address" class="col-sm-4 control-label">Address</label>
+                                        <div class="col-sm-12">
+                                            <textarea name="address" id="address" class="form-control" cols="30" rows="3"></textarea>
+                                            <span class="text-danger error-tags address-error"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="date" class="col-sm-4 control-label">Date</label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control" id="date" name="date"  value="" maxlength="50">
+                                            <span class="text-danger error-tags date-error"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-primary" id="btn-invoice" value="create">Save changes
                                     </button>
                                     </div>
                                 </form>
@@ -313,6 +370,14 @@ $(document).ready( function () {
         $('#item_set_ie_name').val('').change(); 
         $('#itemsetCrudModal').text("Choose Set To Update");
         $('#ajax-itemset-modal').modal('show');
+    });
+
+    $('#invoice').click(function () {
+        error_reset.html('');
+        $('#btn-invoice').text("Print");
+        $('#invoiceForm').trigger("reset");
+        $('#invoiceCrudModal').text("Choose Set To Update");
+        $('#ajax-invoice-modal').modal('show');
     });
 
     $('body').on('click', '#empty_set', function () {

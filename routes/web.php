@@ -26,6 +26,14 @@ Route::get('/', function () {
 Route::get('/invoice_test', function () {
     return view('invoice_test');
 });
+
+Route::get('/front_test', function () {
+    return view('customer.content');
+});
+
+Route::get('/cart_test', function () {
+    return view('customer.cart');
+});
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return view('admin.items.index');
 // })->name('dashboard');

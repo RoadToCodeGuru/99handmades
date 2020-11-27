@@ -103,6 +103,10 @@
     .back-button{
         margin-left: 50%;
     }
+
+    .invoice-box table tr.top table td:nth-child(2){
+        text-align: left !important;
+    }
     </style>
 </head>
 
@@ -118,9 +122,9 @@
                                 <img src="{{URL('theme/assets/images/users/99handmade.png')}}" style="width:100%; max-width:200px;">
                             </td>
                             <td>
-                                Invoice of 99handmades<br>
-                                Created: Today<br>
-                                Due: Today
+                                Name : {{$customer_name}}<br>
+                                Ph No : {{$phone_number}}<br>
+                                Date : {{$date}}
                             </td>
                         </tr>
                     </table>
@@ -132,9 +136,7 @@
                     <table>
                         <tr>
                             <td>
-                                Thank You<br>
-                                Customers<br>
-                                For Your Purchese
+                                Address : {{$address}}
                             </td>
                             <!-- <td>
                                 Acme Corp.<br>
