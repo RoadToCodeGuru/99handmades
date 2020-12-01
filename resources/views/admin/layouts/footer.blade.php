@@ -39,7 +39,7 @@
 <!-- <script src="{{asset('theme/assets/plugins/jquery/jquery.min.js')}}../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script> -->
 <!-- This is data table -->
 <script src="{{asset('theme/assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
 
 <script src="{{asset('theme/assets/plugins/dropify/dist/js/dropify.min.js')}}"></script>
