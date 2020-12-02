@@ -105,7 +105,7 @@
                                             <div class="clearfix"></div>
                                             <hr>
                                             <div class="text-right">
-                                                <button id="btn-invoice" class="btn btn-danger"> Print Out Invoice </button>
+                                                <a href="/invoice_order/{{$order_list->order_id}}" data-toggle="tooltip" data-original-title="Detail" class="btn btn-danger">Print Invoice</a>
                                             </div>
                                         </div>
                                     </div>

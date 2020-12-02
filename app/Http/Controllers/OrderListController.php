@@ -107,4 +107,21 @@ class OrderListController extends Controller
         return Response::json($customer);
         
     }
+
+    public function invoice($id)
+    {
+        $order_list  = OrderList::where('order_id',$id)->with('customer')->first();
+        $date = date("d.m.Y", $order_list->created_on);
+        $order_datas =  json_decode($order_list->order_data, true);
+
+        foreach($order_datas as $data){
+            $f_p[] = $data['final_price'];
+        }
+
+        $sub_total = array_sum($f_p);
+
+        $total = ($sub_total + $order_list->deli_price ) - $order_list->total_discount;
+
+        return view('admin.itemsets.invoice', compact('order_list', 'order_datas', 'sub_total', 'total', 'date'));
+    }
 }

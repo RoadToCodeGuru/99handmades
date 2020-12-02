@@ -113,7 +113,7 @@
 </head>
 
 <body>
-    <a href="/makeset" class="back-button">back</a>
+    <a href="/order" class="back-button">back</a>
     <div id="exDom" class="invoice-box">
         <table cellpadding="0" cellspacing="0">
             <tr class="top">
@@ -124,10 +124,11 @@
                                 <img src="{{URL('theme/assets/images/users/99handmade.png')}}" style="width:100%; max-width:150px;">
                             </td>
                             <td>
-                                Name : {{$customer_name}}<br>
-                                Ph No : {{$phone_number}}<br>
+                                Voucher ID: {{$order_list->order_id}} <br>
+                                Name : {{$order_list->customer->customer_name}} <br>
+                                Ph No : {{$order_list->customer->phone_number}} <br>
                                 Date : {{$date}} <br>
-                                Address : {{$address}}
+                                Address : {{$order_list->customer->customer_address}}
                             </td>
                         </tr>
                     </table>
@@ -158,9 +159,6 @@
                 <td>
                     Item
                 </td>
-                <!-- <td>
-                    Image
-                </td> -->
                 <td>
                     Unit Price
                 </td>
@@ -171,22 +169,19 @@
                     Total Price
                 </td>
             </tr>
-            @foreach($items as $item)
+            @foreach($order_datas as $data)
             <tr class="item">
                 <td>
-                    {{ $item->item->item_name }}
-                </td>
-                <!-- <td>
-                    <img src="{{URL('images/'. $item->item->item_image)}}" style="width:100%; max-width:100px;">
-                </td> -->
-                <td>
-                    {{ $item->item->sale_price }} MMK
+                    {{ $data['item']['item_name'] }}
                 </td>
                 <td>
-                    {{ $item->amount }}
+                    {{ $data['item']['sale_price'] }} MMK
                 </td>
                 <td>
-                    {{ $item->total_price }} MMK
+                    {{ $data['item_count'] }}
+                </td>
+                <td>
+                    {{ $data['final_price']}} MMK
                 </td>
             </tr>
             @endforeach
@@ -197,7 +192,7 @@
                 <td></td>
                 <td></td>
                 <td>
-                   Sub Total: {{$subtotal}} MMK
+                   Sub Total: {{$sub_total}} MMK
                 </td>
             </tr>
             <tr class="total">
@@ -206,21 +201,32 @@
                 <td></td>
                 <td></td>
                 <td>
-                   Delivery: {{$delivery}} MMK
+                   Delivery: {{$order_list->deli_price}} MMK
                 </td>
             </tr>
+            @if($order_list->total_discount != 0)
             <tr class="total">
                 <td></td>
                 <!-- <td></td> -->
                 <td></td>
                 <td></td>
                 <td>
-                   Total: {{$subtotal + $delivery}} MMK
+                   Discount: {{$order_list->total_discount}} MMK
+                </td>
+            </tr>
+            @endif
+            <tr class="total">
+                <td></td>
+                <!-- <td></td> -->
+                <td></td>
+                <td></td>
+                <td>
+                   Total: {{$total}} MMK
                 </td>
             </tr>
         </table>
     </div>
-    <a href="/makeset" class="back-button">back</a>
+    <a href="/order" class="back-button">back</a>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.2/dist/FileSaver.min.js"></script>

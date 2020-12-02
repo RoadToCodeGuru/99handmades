@@ -70,7 +70,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('create_makeset', [MakeSetController::class, 'store']);
     Route::post('delete_makeset', [MakeSetController::class, 'destroy']);
 
-    Route::get('invoice', [MakeSetController::class, 'invoice']);
     Route::get('set_detail/{id}', [MakeSetController::class, 'set_detail']);
 
     // itemset
@@ -94,7 +93,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('order/{id}', [OrderListController::class, 'edit']);
     Route::post('create_order', [OrderListController::class, 'store']);
     Route::post('delete_order', [OrderListController::class, 'destroy']);
+
     Route::get('detail_order/{id}', [OrderListController::class, 'detail']);
+    Route::get('invoice_order/{id}', [OrderListController::class, 'invoice']);
 
     //order_box
     Route::get('order_box', [OrderController::class, 'index']);

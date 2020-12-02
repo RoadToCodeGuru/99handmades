@@ -53,7 +53,6 @@
                                             <a href="javascript:void(0)" id="approve_set" class="btn btn-sm mb-2 btn-warning btn-rounded mr-2" data-toggle="modal" data-whatever="@mdo">Create</a>
                                             <a href="javascript:void(0)" id="import_set" class="btn btn-sm mb-2 btn-success btn-rounded mr-2" data-toggle="modal" data-whatever="@mdo">Import</a>
                                             <a href="javascript:void(0)" id="update_set" class="btn btn-sm mb-2 btn-info btn-rounded mr-2" data-toggle="modal" data-whatever="@mdo">Edit</a>
-                                            <a href="javascript:void(0)" id="invoice" class="btn btn-sm mb-2 btn-primary btn-rounded mr-2" data-toggle="modal" data-whatever="@mdo">Invoice</a>
                                             <a href="javascript:void(0)" id="empty_set" class="btn btn-sm mb-2 btn-danger btn-rounded mr-2" data-toggle="modal" data-whatever="@mdo">Empty</a>
                                             <a href="/itemset" class="btn btn-sm mb-2 btn-secondary btn-rounded">Item Sets List</a>
                                             <h5 class="mt-4" id="sub_total"></h5>
