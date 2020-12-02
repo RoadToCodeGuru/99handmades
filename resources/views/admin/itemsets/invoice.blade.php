@@ -14,7 +14,7 @@
         font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
         color: #555;
         position: relative;
-        background: url('/theme/assets/images/users/background.jpg') ;
+        background: url('/theme/assets/images/users/background.jpg') no-repeat center fixed;
         background-size: cover;
     }
     
