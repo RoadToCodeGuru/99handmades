@@ -215,7 +215,7 @@
                 <td></td>
                 <td></td>
                 <td>
-                   Total: {{$subtotal - $delivery}} MMK
+                   Total: {{$subtotal + $delivery}} MMK
                 </td>
             </tr>
         </table>

@@ -88,9 +88,9 @@ class OrderListController extends Controller
         $total_capital_price = array_sum($c_p);
         $sub_total = array_sum($f_p);
 
-        $total = $sub_total - ($order_list->total_discount + $order_list->deli_price);
+        $total = ($sub_total + $order_list->deli_price ) - $order_list->total_discount;
 
-        $total_profit = $total - $total_capital_price;
+        $total_profit = ($sub_total - $order_list->total_discount ) - $total_capital_price;
 
         return view('admin.details.order_detail', compact('order_list', 'order_datas', 'total_capital_price', 'sub_total', 'total', 'total_profit'));
     }
