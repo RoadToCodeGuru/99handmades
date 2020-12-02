@@ -25,4 +25,9 @@ class Item extends Model
     {
         return $this->hasOne('App\Models\MakeSet', 'item_id', 'item_id');
     }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Models\Order');
+    }
 }

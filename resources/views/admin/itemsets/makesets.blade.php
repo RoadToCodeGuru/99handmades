@@ -40,9 +40,9 @@
                                     <table id="laravel_datatable" class="table w-100 table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
                                                 <th>Item Code</th>
                                                 <th>Name</th>
+                                                <th>Image</th>
                                                 <th>Sale-P</th>
                                                 <th>Amount</th>
                                                 <th>Total-P</th>
@@ -218,6 +218,14 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <label for="date" class="col-sm-4 control-label">Delivery</label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control" id="delivery" name="delivery"  value="0" maxlength="50">
+                                            <span class="text-danger error-tags date-error"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
                                         <label for="date" class="col-sm-4 control-label">Date</label>
                                         <div class="col-sm-12">
                                             <input type="text" class="form-control" id="date" name="date"  value="" maxlength="50">
@@ -278,7 +286,7 @@ $(document).ready( function () {
                   {data: 'item.item_id' , name: 'item.item_id'},
                   {data: 'item.item_name' , name: 'item.item_name'},
                   {data: 'item.item_image' , name: 'item.item_image'},
-                  {data: 'item.sale_price' , name: 'category.sale_price'},
+                  {data: 'item.sale_price' , name: 'item.sale_price'},
                   {data: 'amount' , name: 'amount'},
                   {data: 'total_price' , name: 'total_price'},
                   {data: 'action', name: 'action', orderable: false},

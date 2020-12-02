@@ -93,12 +93,13 @@ class MakeSetController extends Controller
         $phone_number =  $request->phone_number;
         $address = $request->address;
         $date = $request->date;
+        $delivery = $request->delivery;
 
         $items   =   MakeSet::with('item')->get();
         foreach($items as $item){
             $subtotal_arr[] = $item->total_price;
         }
         $subtotal = array_sum($subtotal_arr);
-        return view('admin.itemsets.invoice', compact('items', 'subtotal', 'customer_name', 'phone_number', 'address', 'date'));
+        return view('admin.itemsets.invoice', compact('items', 'subtotal', 'customer_name', 'phone_number', 'address', 'date', 'delivery'));
     }
 }

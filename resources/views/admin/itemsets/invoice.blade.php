@@ -6,7 +6,7 @@
     
     <style>
     .invoice-box {
-        max-width: 1220px;
+        max-width: 1230px;
         margin: auto;
         padding: 30px;
         font-size: 16px;
@@ -14,6 +14,8 @@
         font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
         color: #555;
         position: relative;
+        background: url('/theme/assets/images/users/background.jpg') ;
+        background-size: cover;
     }
     
     .invoice-box table {
@@ -52,7 +54,7 @@
     }
     
     .invoice-box table tr.heading td {
-        background: #eee;
+        background: #C1C1C1;
         border-bottom: 1px solid black;
         font-weight: bold;
     }
@@ -119,30 +121,14 @@
                     <table>
                         <tr>
                             <td class="title">
-                                <img src="{{URL('theme/assets/images/users/99handmade.png')}}" style="width:100%; max-width:200px;">
+                                <img src="{{URL('theme/assets/images/users/99handmade.png')}}" style="width:100%; max-width:150px;">
                             </td>
                             <td>
                                 Name : {{$customer_name}}<br>
                                 Ph No : {{$phone_number}}<br>
-                                Date : {{$date}}
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            
-            <tr class="information">
-                <td colspan="2">
-                    <table>
-                        <tr>
-                            <td>
+                                Date : {{$date}} <br>
                                 Address : {{$address}}
                             </td>
-                            <!-- <td>
-                                Acme Corp.<br>
-                                John Doe<br>
-                                john@example.com
-                            </td> -->
                         </tr>
                     </table>
                 </td>
@@ -211,7 +197,25 @@
                 <td></td>
                 <td></td>
                 <td>
-                   Total: {{$subtotal}} MMK
+                   Sub Total: {{$subtotal}} MMK
+                </td>
+            </tr>
+            <tr class="total">
+                <td></td>
+                <!-- <td></td> -->
+                <td></td>
+                <td></td>
+                <td>
+                   Delivery: {{$delivery}} MMK
+                </td>
+            </tr>
+            <tr class="total">
+                <td></td>
+                <!-- <td></td> -->
+                <td></td>
+                <td></td>
+                <td>
+                   Total: {{$subtotal - $delivery}} MMK
                 </td>
             </tr>
         </table>
