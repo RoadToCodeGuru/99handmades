@@ -162,13 +162,13 @@
                     Image
                 </td> -->
                 <td>
-                    Amount
+                    Unit Price
                 </td>
                 <td>
-                    Price
+                    Quantity
                 </td>
                 <td>
-                    Total
+                    Total Price
                 </td>
             </tr>
             @foreach($items as $item)
@@ -180,10 +180,10 @@
                     <img src="{{URL('images/'. $item->item->item_image)}}" style="width:100%; max-width:100px;">
                 </td> -->
                 <td>
-                    {{ $item->amount }}
+                    {{ $item->item->sale_price }} MMK
                 </td>
                 <td>
-                    {{ $item->item->sale_price }} MMK
+                    {{ $item->amount }}
                 </td>
                 <td>
                     {{ $item->total_price }} MMK
