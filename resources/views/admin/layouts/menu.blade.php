@@ -24,6 +24,12 @@
                         <li><a href="/itemset">Item Sets List</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a class="has-arrow" href="/customers" aria-expanded="false"><i class="mdi mdi-clipboard"></i><span class="hide-menu">Customers</span></a>
+                </li>
+                <li>
+                    <a class="has-arrow" href="/order" aria-expanded="false"><i class="mdi mdi-clipboard"></i><span class="hide-menu">Orders</span></a>
+                </li>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
