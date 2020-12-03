@@ -56,7 +56,7 @@
                                 <!--second tab-->
                                 <div class="tab-pane" id="profile" role="tabpanel">
                                 <div class="card card-body printableArea">
-                                    <h3><b>INVOICE</b> <span class="pull-right">#5669626</span></h3>
+                                    <h3><b>INVOICE</b> <span class="pull-right">#{{$order_list->order_id}}</span></h3>
                                     <hr>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -64,6 +64,7 @@
                                                 <table class="table table-hover">
                                                     <thead>
                                                         <tr>
+                                                            <th class="text-center">#</th>
                                                             <th class="text-center">Item Code</th>
                                                             <th>Item Name</th>
                                                             <th class="text-right">Capital Price</th>
@@ -77,14 +78,19 @@
                                                     <tbody>
                                                     @foreach($order_datas as $order_data)
                                                         <tr>
-                                                            <td class="text-center">{{$order_data['item_id']}}</td>
-                                                            <td>{{$order_data['item']['item_name']}}</td>
-                                                            <td class="text-right">{{$order_data['item']['actual_price']}}</td>
-                                                            <td class="text-right">{{$order_data['item']['sale_price']}}</td>
-                                                            <td class="text-right">{{$order_data['discount']}}</td>
-                                                            <td class="text-right">{{$order_data['item_count']}}</td>
-                                                            <td class="text-right">{{$order_data['item']['actual_price'] * $order_data['item_count']}}</td>
-                                                            <td class="text-right">{{$order_data['final_price']}}</td>
+                                                            <td class="text-center">
+                                                            <div class="checkbox checkbox-success">
+                                                                <input id="checkbox1_{{$order_data['item_id']}}" data-id="{{$order_data['item_id']}}" class="order_check" type="checkbox">
+                                                                <label for="checkbox1_{{$order_data['item_id']}}"></label>
+                                                            </div></td>
+                                                            <td class="text-center check_line_{{$order_data['item_id']}}">{{$order_data['item_id']}}</td>
+                                                            <td class=" check_line_{{$order_data['item_id']}}">{{$order_data['item']['item_name']}}</td>
+                                                            <td class="text-right check_line_{{$order_data['item_id']}}">{{$order_data['item']['actual_price']}}</td>
+                                                            <td class="text-right check_line_{{$order_data['item_id']}}">{{$order_data['item']['sale_price']}}</td>
+                                                            <td class="text-right check_line_{{$order_data['item_id']}}">{{$order_data['discount']}}</td>
+                                                            <td class="text-right check_line_{{$order_data['item_id']}}">{{$order_data['item_count']}}</td>
+                                                            <td class="text-right check_line_{{$order_data['item_id']}}">{{$order_data['item']['actual_price'] * $order_data['item_count']}}</td>
+                                                            <td class="text-right check_line_{{$order_data['item_id']}}">{{$order_data['final_price']}}</td>
                                                         </tr>
                                                     @endforeach
                                                     </tbody>
@@ -114,20 +120,33 @@
                                 <div class="tab-pane" id="settings" role="tabpanel">
                                     <div class="card-body">
                                         <div>
-                                            <p class="float-left">Status: <div class="ml-3 label label-success">Confirmed</div></p>
+                                            @if($order_list->status == 0)
+                                                <p class="float-left">Status: <div class="ml-3 label label-info">Draft</div></p>
+                                            @elseif($order_list->status == 1)
+                                                <p class="float-left">Status: <div class="ml-3 label label-primary">Confirmed</div></p>
+                                            @elseif($order_list->status == 2)
+                                                <p class="float-left">Status: <div class="ml-3 label label-success">Completed</div></p>
+                                            @endif
                                         </div>
                                         <form class="form-horizontal form-material">
                                             <div class="form-group">
-                                                
-                                                    <button class="btn btn-sm btn-rounded btn-info">Draft Order</button>
-                                                    <button class="btn btn-sm btn-rounded btn-primary">Confirm Order</button>
-                                                    <button class="btn btn-sm btn-rounded btn-success float-right">Complete Order</button>
-                                                
+                                                    @if($order_list->status == 0)
+                                                    <a href="javascript:void(0)" data-id="confirm" data-id2="{{$order_list->order_id}}" class="btn btn_status btn-sm btn-rounded btn-primary">Confirm Order</a>
+                                                    @endif
+                                                    @if($order_list->status == 1)
+                                                    <a href="javascript:void(0)" data-id="draft" data-id2="{{$order_list->order_id}}" class="btn btn_status btn-sm btn-rounded btn-info">Draft Order</a>
+                                                    <a href="javascript:void(0)" data-id="complete" data-id2="{{$order_list->order_id}}" class="btn btn_status btn-sm btn-rounded btn-success float-right">Complete Order</a>
+                                                    @endif
                                             </div>
                                         </form>
                                         <hr>
                                         <div>
+                                            @if($order_list->status == 0 || $order_list->status == 1)
                                             <p class="float-left">Delete Order: <button class="btn btn-danger ml-3">Delete</button></p>
+                                            @endif
+                                            @if($order_list->status == 2)
+                                            <p class="float-left">Delete Completed Order: <button class="btn btn-danger ml-3">Delete</button></p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -147,5 +166,53 @@
 @endsection
 
 @section('footer-content')
+<script>
+var SITEURL = '{{URL::to('')}}';
+var error_reset = $('.error-tags');
+$(document).ready( function () {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
+    $('body').on('click', '.btn_status', function () {
+        let status = $(this).data('id');
+        let id = $(this).data('id2');
+        if(status == 'complete' ) {
+            if (confirm("Complete Order? status can't be changed after that!!") == true) {
+                // ajax
+                $.ajax({
+                    type:"POST",
+                    url: SITEURL + "/complete_order",
+                    data: { status: status , id: id},
+                    dataType: 'json',
+                    success: function(res){
+                        location.reload();
+                    }
+                });
+            }
+        }else{
+            if (confirm("Change Status?") == true) {
+                // ajax
+                $.ajax({
+                    type:"POST",
+                    url: SITEURL + "/status_change",
+                    data: { status: status , id: id},
+                    dataType: 'json',
+                    success: function(res){
+                        location.reload();
+                    }
+                });
+            }
+        }
+        
+    });
+
+    // $('body').on('change', '.order_check', function () {
+    //     let id = $(this).data('id');
+        
+    // });
+});
+</script>
 @endsection

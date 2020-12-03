@@ -15,4 +15,9 @@ class OrderList extends Model
     {
         return $this->belongsTo('App\Models\Customer');
     }
+
+    public function order_logs()
+    {
+        return $this->hasMany('App\Models\OrderLog', 'order_id', 'order_id');
+    }
 }

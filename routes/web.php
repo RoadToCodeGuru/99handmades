@@ -8,6 +8,7 @@ use App\Http\Controllers\MakeSetController;
 use App\Http\Controllers\ItemSetController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderListController;
+use App\Http\Controllers\OrderLogController;
 use App\Http\Controllers\OrderController;
 
 use App\Http\Controllers\Customer\ContentController;
@@ -105,4 +106,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::post('import_order_box', [OrderController::class, 'import']);
     Route::post('empty_order_box', [OrderController::class, 'empty']);
+
+    // status and logs
+    Route::post('status_change', [OrderLogController::class, 'status']);
+    Route::post('complete_order', [OrderLogController::class, 'complete']);
 });

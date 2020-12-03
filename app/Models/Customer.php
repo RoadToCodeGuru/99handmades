@@ -16,10 +16,10 @@ class Customer extends Model
         return $this->hasMany('App\Models\OrderList');
     }
 
-    // public function sub_category()
-    // {
-    //     return $this->belongsTo('App\Models\SubCategory', 'subcategory_id');
-    // }
+    public function order_logs()
+    {
+        return $this->hasMany('App\Models\OrderLog');
+    }
 
     // public function makeset()
     // {

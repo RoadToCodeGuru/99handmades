@@ -30,4 +30,9 @@ class Item extends Model
     {
         return $this->hasMany('App\Models\Order');
     }
+
+    public function order_logs()
+    {
+        return $this->hasMany('App\Models\OrderLog', 'item_id', 'item_id');
+    }
 }
