@@ -91,6 +91,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     //orders
     Route::get('order', [OrderListController::class, 'index']);
+    Route::get('completed_sales', [OrderListController::class, 'sale']);
     Route::get('order/{id}', [OrderListController::class, 'edit']);
     Route::post('create_order', [OrderListController::class, 'store']);
     Route::post('delete_order', [OrderListController::class, 'destroy']);

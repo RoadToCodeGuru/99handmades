@@ -28,7 +28,11 @@
                     <a class="has-arrow" href="/customers" aria-expanded="false"><i class="mdi mdi-clipboard"></i><span class="hide-menu">Customers</span></a>
                 </li>
                 <li>
-                    <a class="has-arrow" href="/order" aria-expanded="false"><i class="mdi mdi-clipboard"></i><span class="hide-menu">Orders</span></a>
+                    <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-layers"></i><span class="hide-menu">Order and Sale</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="/order">Orders List </a></li>
+                        <li><a href="/completed_sales">Completed Sales</a></li>
+                    </ul>
                 </li>
             </ul>
         </nav>

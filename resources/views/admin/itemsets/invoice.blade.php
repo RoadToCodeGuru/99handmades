@@ -29,13 +29,13 @@
         vertical-align: top;
     }
     
-    .invoice-box table tr td:nth-child(2) {
-        text-align: right;
-    }
     .invoice-box table tr td:nth-child(3) {
         text-align: right;
     }
     .invoice-box table tr td:nth-child(4) {
+        text-align: right;
+    }
+    .invoice-box table tr td:nth-child(5) {
         text-align: right;
     }
     
@@ -71,7 +71,7 @@
         border-bottom: none;
     }
     
-    .invoice-box table tr.total td:nth-child(4) {
+    .invoice-box table tr.total td:nth-child(5) {
         font-weight: bold;
     }
     
@@ -99,14 +99,14 @@
         text-align: right;
     }
     
-    .rtl table tr td:nth-child(2) {
+    .rtl table tr td:nth-child(3) {
         text-align: left;
     }
     .back-button{
         margin-left: 50%;
     }
 
-    .invoice-box table tr.top table td:nth-child(2){
+    .invoice-box table tr.top table td:nth-child(3){
         text-align: left !important;
     }
     </style>
@@ -124,7 +124,7 @@
                                 <img src="{{URL('theme/assets/images/users/99handmade.png')}}" style="width:100%; max-width:150px;">
                             </td>
                             <td>
-                                Voucher ID: {{$order_list->order_id}} <br>
+                                Voucher ID: {{$order_list->order_id}} <br><br>
                                 Name : {{$order_list->customer->customer_name}} <br>
                                 Ph No : {{$order_list->customer->phone_number}} <br>
                                 Date : {{$date}} <br>
@@ -157,6 +157,9 @@
             
             <tr class="heading">
                 <td>
+                    No.
+                </td>
+                <td>
                     Item
                 </td>
                 <td>
@@ -172,10 +175,13 @@
             @foreach($order_datas as $data)
             <tr class="item">
                 <td>
+                    {{ $data['id'] }}
+                </td>
+                <td>
                     {{ $data['item']['item_name'] }}
                 </td>
                 <td>
-                    {{ $data['item']['sale_price'] }} MMK
+                    {{ ( $data['item']['sale_price'] - $data['discount'] ) }} MMK
                 </td>
                 <td>
                     {{ $data['item_count'] }}
@@ -188,7 +194,7 @@
 
             <tr class="total">
                 <td></td>
-                <!-- <td></td> -->
+                <td></td>
                 <td></td>
                 <td></td>
                 <td>
@@ -197,7 +203,7 @@
             </tr>
             <tr class="total">
                 <td></td>
-                <!-- <td></td> -->
+                <td></td>
                 <td></td>
                 <td></td>
                 <td>
@@ -207,7 +213,7 @@
             @if($order_list->total_discount != 0)
             <tr class="total">
                 <td></td>
-                <!-- <td></td> -->
+                <td></td>
                 <td></td>
                 <td></td>
                 <td>
@@ -217,7 +223,7 @@
             @endif
             <tr class="total">
                 <td></td>
-                <!-- <td></td> -->
+                <td></td>
                 <td></td>
                 <td></td>
                 <td>

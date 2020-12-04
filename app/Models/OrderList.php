@@ -20,4 +20,9 @@ class OrderList extends Model
     {
         return $this->hasMany('App\Models\OrderLog', 'order_id', 'order_id');
     }
+
+    public function sale_profits()
+    {
+        return $this->hasMany('App\Models\SaleProfit', 'order_id', 'order_id');
+    }
 }

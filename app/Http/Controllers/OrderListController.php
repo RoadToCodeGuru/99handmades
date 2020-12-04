@@ -12,13 +12,25 @@ class OrderListController extends Controller
     public function index()
     {
         if(request()->ajax()) {
-            return datatables()->of(OrderList::with('customer')->select('*'))
+            return datatables()->of(OrderList::whereIn('status', [0,1])->with('customer')->select('*'))
             ->addColumn('action', 'admin.orders.order_lists_action')
             ->rawColumns(['action'])
             ->addIndexColumn()
             ->make(true);
         }
         return view('admin.orders.order_lists');
+    }
+
+    public function sale()
+    {
+        if(request()->ajax()) {
+            return datatables()->of(OrderList::where('status', 2)->with('customer')->select('*'))
+            ->addColumn('action', 'admin.orders.c_action')
+            ->rawColumns(['action'])
+            ->addIndexColumn()
+            ->make(true);
+        }
+        return view('admin.orders.completed');
     }
 
     /**

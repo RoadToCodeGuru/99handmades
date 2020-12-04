@@ -34,9 +34,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Order</h4>
-                                <h6 class="card-subtitle">order lists</h6>
-                                <a href="javascript:void(0)" id="create-new-order" class="btn btn-outline-success btn-rounded float-right" data-toggle="modal" data-target="#create-order" data-whatever="@mdo"><i class="ti-plus pr-1"></i>Create Order</a>
+                                <h4 class="card-title">Sale</h4>
+                                <h6 class="card-subtitle">completed sale lists</h6>
                                 <div class="table-responsive m-t-40">
                                     <table id="laravel_datatable" class="table w-100 table-bordered table-striped">
                                         <thead>
@@ -51,27 +50,6 @@
                                         </thead>
                                     </table>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="modal fade" id="ajax-order-modal" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h3 class="modal-title" id="orderCrudModal"></h3>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form action='/order_box' id="orderForm" name="orderForm" class="form-horizontal">
-                                    <input type="hidden" name="order_id" id="order_id">
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                
                             </div>
                         </div>
                     </div>
@@ -102,7 +80,7 @@ $(document).ready( function () {
          processing: true,
          serverSide: true,
          ajax: {
-          url: SITEURL + "/order",
+          url: SITEURL + "/completed_sales",
           type: 'GET',
          },
          columns: [
@@ -128,59 +106,7 @@ $(document).ready( function () {
                   {data: 'action', name: 'action', orderable: false},
          ],
         order: [[0, 'desc']],
-       
     });
- 
- /*  When order click add order button */
-    $('#create-new-order').click(function () {
-        error_reset.html('');
-        $('#order_id').val('');
-        $('#orderForm').submit();
-    });
-  
-   /* When click edit customer */
-    $('body').on('click', '#edit-order', function () {
-      var _id = $(this).data('id');
-      $('#order_id').val(_id);
-      $('#orderForm').submit();
-   });
 });
-  
-if ($("#customerForm").length > 0) {
-      $("#customerForm").validate({
-  
-     submitHandler: function(form) {
-  
-      var actionType = $('#btn-save').val();
-      $('#btn-save').html('Sending..');
-       
-      $.ajax({
-          data: $('#customerForm').serialize(),
-          url: SITEURL + "/create_customers",
-          type: "POST",
-          dataType: 'json',
-          success: function (data) {
-              $('#customerForm').trigger("reset");
-              $('#ajax-customer-modal').modal('hide');        
-              $('#btn-customer').html('Save');
-              var oTable = $('#laravel_datatable').dataTable();
-              oTable.fnDraw(false);
-          },
-          error: function (data) {
-              error_reset.html('');
-
-              var e = data.responseJSON.errors;
-              $('.customer_name-error').html(e.customer_name);
-              $('.phone_number-error').html(e.phone_number);
-              $('.address-error').html(e.address);
-              
-              $('#btn-save').html('Save Changes');
-          }
-          
-      });
-    }
-  });
-}
-
 </script>
 @endsection

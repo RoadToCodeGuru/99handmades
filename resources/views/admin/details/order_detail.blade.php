@@ -65,6 +65,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th class="text-center">#</th>
+                                                            <th class="text-center">No.</th>
                                                             <th class="text-center">Item Code</th>
                                                             <th>Item Name</th>
                                                             <th class="text-right">Capital Price</th>
@@ -83,6 +84,7 @@
                                                                 <input id="checkbox1_{{$order_data['item_id']}}" data-id="{{$order_data['item_id']}}" class="order_check" type="checkbox">
                                                                 <label for="checkbox1_{{$order_data['item_id']}}"></label>
                                                             </div></td>
+                                                            <td class="text-center check_line_{{$order_data['item_id']}}">{{$order_data['id']}}</td>
                                                             <td class="text-center check_line_{{$order_data['item_id']}}">{{$order_data['item_id']}}</td>
                                                             <td class=" check_line_{{$order_data['item_id']}}">{{$order_data['item']['item_name']}}</td>
                                                             <td class="text-right check_line_{{$order_data['item_id']}}">{{$order_data['item']['actual_price']}}</td>
