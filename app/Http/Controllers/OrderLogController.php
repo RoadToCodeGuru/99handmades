@@ -28,6 +28,13 @@ class OrderLogController extends Controller
         return Response::json(['status' => 'reload']);
     }
 
+    public function delete(Request $request)
+    {
+        OrderList::where('order_id', $request->id)->delete();
+
+        return redirect('/order');
+    }
+
     public function complete(Request $request)
     {
         $id = $request->id;

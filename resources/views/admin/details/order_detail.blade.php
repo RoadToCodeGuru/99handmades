@@ -144,10 +144,10 @@
                                         <hr>
                                         <div>
                                             @if($order_list->status == 0 || $order_list->status == 1)
-                                            <p class="float-left">Delete Order: <button class="btn btn-danger ml-3">Delete</button></p>
+                                            <p class="float-left">Delete Order: <a href="javascript:void(0)" id="delete_normal" data-id="{{$order_list->order_id}}" class="btn btn-danger ml-3">Delete</a></p>
                                             @endif
                                             @if($order_list->status == 2)
-                                            <p class="float-left">Delete Completed Order: <button class="btn btn-danger ml-3">Delete</button></p>
+                                            <p class="float-left">Delete Completed Order: <a href="javascript:void(0)" id="delete_complete" data-id="{{$order_list->order_id}}" class="btn btn-danger ml-3">Delete</a></p>
                                             @endif
                                         </div>
                                     </div>
@@ -208,7 +208,13 @@ $(document).ready( function () {
                 });
             }
         }
-        
+    });
+
+    $('body').on('click', '#delete_normal', function () {
+        let id = $(this).data('id');
+            if (confirm("Delete Complete Order?") == true) {
+                window.location.href = SITEURL + "/delete_order/" +id
+            }
     });
 
     // $('body').on('change', '.order_check', function () {

@@ -111,4 +111,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     // status and logs
     Route::post('status_change', [OrderLogController::class, 'status']);
     Route::post('complete_order', [OrderLogController::class, 'complete']);
+    Route::get('delete_order/{id}', [OrderLogController::class, 'delete']);
 });
