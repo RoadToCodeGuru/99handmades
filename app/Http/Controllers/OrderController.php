@@ -44,7 +44,7 @@ class OrderController extends Controller
             ->make(true);
         }
 
-        $items = Item::get(['item_id', 'item_name']);
+        $items = Item::get(['item_id', 'item_name', 'stock_amount']);
         $item_sets = ItemSet::get(['id', 'item_set_name']);
 
         $customers = Customer::get(['id', 'customer_name']);

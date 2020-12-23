@@ -92,7 +92,7 @@
                                         <div class="col-sm-12">
                                             <select class="form-control select2" name="item_id" id="item_id" style="width: 100%">
                                                 @foreach($items as $item)
-                                                <option value="{{$item->item_id}}">{{$item->item_id}} / {{ $item->item_name }}</option>
+                                                <option value="{{$item->item_id}}">{{$item->item_id}} / {{ $item->item_name }} / {{ $item->stock_amount }}</option>
                                                 @endforeach
                                             </select>
                                             <span class="text-danger error-tags item_name-error"></span>
