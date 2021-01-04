@@ -112,6 +112,7 @@
 
     #flex_box{
         display : flex;
+        flex-wrap: wrap
     }
     </style>
 </head>
