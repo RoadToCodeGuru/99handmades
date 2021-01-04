@@ -98,6 +98,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('detail_order/{id}', [OrderListController::class, 'detail']);
     Route::get('invoice_order/{id}', [OrderListController::class, 'invoice']);
+    Route::get('phcover', [OrderListController::class, 'phcover']);
 
     //order_box
     Route::get('order_box', [OrderController::class, 'index']);

@@ -6,6 +6,9 @@ use Redirect,Response;
 use Illuminate\Http\Request;
 use App\Models\OrderList;
 use App\Models\Order;
+use App\Models\Customer;
+use App\Models\Item;
+use App\Models\SubCategory;
 
 class OrderListController extends Controller
 {
@@ -18,7 +21,8 @@ class OrderListController extends Controller
             ->addIndexColumn()
             ->make(true);
         }
-        return view('admin.orders.order_lists');
+        $customers = Customer::get();
+        return view('admin.orders.order_lists', compact('customers'));
     }
 
     public function sale()
@@ -136,4 +140,12 @@ class OrderListController extends Controller
 
         return view('admin.itemsets.invoice', compact('order_list', 'order_datas', 'sub_total', 'total', 'date'));
     }
+
+    public function phcover(){
+        $sc = SubCategory::where('sub_category_name', 'Ph cover')->first();
+        $covers = Item::where('subcategory_id', $sc->id)->where('stock_amount','>', 0)->get();
+
+        return view('admin.details.phcover_list', compact('covers'));
+    }
+
 }
