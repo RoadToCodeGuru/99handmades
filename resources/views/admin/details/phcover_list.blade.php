@@ -110,10 +110,10 @@
         text-align: left !important;
     }
 
-    #flex_box{
+    /* #flex_box{
         display : flex;
         flex-wrap: wrap
-    }
+    } */
     </style>
 </head>
 
