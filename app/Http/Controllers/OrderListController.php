@@ -43,6 +43,29 @@ class OrderListController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    function stock_change($datas, $action)
+    {
+        foreach($datas as $data){
+
+            $item = Item::where('item_id', $data->item_id)->first();
+            $stock = $item->stock_amount;
+
+            if($action == 'sum')
+            {
+                Item::where('item_id', $data->item_id)->update([
+                    'stock_amount' => $stock + $data->item_count
+                ]);
+            }else if($action == 'sub')
+            {
+                Item::where('item_id', $data->item_id)->update([
+                    'stock_amount' => $stock - $data->item_count
+                ]);
+            }
+            
+        }
+    }
+
     public function store(Request $request)
     {   
         $this->validate($request, [
@@ -52,6 +75,9 @@ class OrderListController extends Controller
             'status' => 'required',
         ]);
 
+        $session_data = session('prev_data');
+        $prev_datas =  json_decode($session_data, true);
+        
         $id = $request->od_box_id;
 
         $set_data = Order::where('customer_id', $request->customer_id)->with('item')->get();
@@ -70,21 +96,33 @@ class OrderListController extends Controller
         
         if($id != null or $id != '')
         {   
+            foreach($prev_datas as $p_data){
+
+                $item = Item::where('item_id', $p_data['item_id'])->first();
+                $stock = $item->stock_amount;
+    
+                Item::where('item_id', $p_data['item_id'])->update([
+                    'stock_amount' => $stock + $p_data['item_count']
+                ]);
+            }
+
             $order_list   =   OrderList::where('order_id', $id)->update($order_data);
         }
         else 
         {
             $order_list   =   OrderList::create($order_data);  
             
-            foreach($set_data as $data){
+        }
 
-                $item = Item::where('item_id', $data->item_id)->first();
-                $stock = $item->stock_amount;
-    
-                Item::where('item_id', $data->item_id)->update([
-                    'stock_amount' => $stock - $data->item_count
-                ]);
-            }
+
+        foreach($set_data as $data){
+
+            $item = Item::where('item_id', $data->item_id)->first();
+            $stock = $item->stock_amount;
+
+            Item::where('item_id', $data->item_id)->update([
+                'stock_amount' => $stock - $data->item_count
+            ]);
         }
 
         Order::where('customer_id', $request->customer_id)->delete();
@@ -130,12 +168,12 @@ class OrderListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
-    {
-        $customer   =   Customer::where('id', $request->id)->delete();
-        return Response::json($customer);
+    // public function destroy(Request $request)
+    // {
+    //     $customer   =   Customer::where('id', $request->id)->delete();
+    //     return Response::json($customer);
         
-    }
+    // }
 
     public function invoice($id)
     {

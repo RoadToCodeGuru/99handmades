@@ -35,6 +35,11 @@ class OrderController extends Controller
                 ]);
             }
 
+            $set_data = Order::where('customer_id', $request->ordering_customer)->with('item')->get();
+            $prev_data = (string) $set_data;
+
+            session(['prev_data' => $prev_data]);
+
             $type = 'edit';
             $o_id = $request->order_id;
         }

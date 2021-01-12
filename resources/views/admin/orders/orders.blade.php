@@ -36,10 +36,8 @@
                             <div class="card-body">
                                 @if($type == 'create')
                                 <h4 class="card-title">Creating the order of " {{$cus_info->customer_name}} "</h4>
-                                <input type="hidden" value="0" name="action" id="action">
                                 @elseif($type == 'edit')
                                 <h4 class="card-title">Editing  " {{$cus_info->customer_name}} "s order</h4>
-                                <input type="hidden" value="1" name="action" id="action">
                                 @endif
                                 <h6 class="card-subtitle">order items</h6>
                                 <a href="javascript:void(0)" id="create-new-box" class="btn btn-outline-success btn-rounded" data-toggle="modal" data-target="#create-box" data-whatever="@mdo"><i class="ti-plus pr-1"></i>Add Item</a>
