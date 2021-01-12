@@ -1,21 +1,19 @@
-<meta charset="utf-8">
-<title>Twitter Bootstrap shopping cart</title>
+<meta charset="UTF-8">
+<meta name="description" content="Online Shop">
+<meta name="keywords" content="99, Handmades, Accessorries, Handcraft">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
-<!-- Bootstrap styles -->
-<link href="{{asset('customer/assets/css/bootstrap.css')}}" rel="stylesheet"/>
-<!-- Customize styles -->
-<link href="{{asset('customer/assets/style.css')}}" rel="stylesheet"/>
-<!-- font awesome styles -->
-<link href="{{asset('customer/assets/font-awesome/css/font-awesome.css')}}" rel="stylesheet">
-    <!--[if IE 7]>
-        <link href="css/font-awesome-ie7.min.css" rel="stylesheet">
-    <![endif]-->
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>99 handmades and accessories</title>
 
-    <!--[if lt IE 9]>
-        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
-<!-- Favicons -->
-<link rel="shortcut icon" href="{{asset('customer/assets/ico/favicon.ico')}}">
+<!-- Css Styles -->
+<link rel="stylesheet" href="{{asset('customer/css/bootstrap.min.css')}}" type="text/css">
+<link rel="stylesheet" href="{{asset('customer/css/font-awesome.min.css')}}" type="text/css">
+<link rel="stylesheet" href="{{asset('customer/css/elegant-icons.css')}}" type="text/css">
+<link rel="stylesheet" href="{{asset('customer/css/nice-select.css')}}" type="text/css">
+<link rel="stylesheet" href="{{asset('customer/css/jquery-ui.min.css')}}" type="text/css">
+<link rel="stylesheet" href="{{asset('customer/css/owl.carousel.min.css')}}" type="text/css">
+<link rel="stylesheet" href="{{asset('customer/css/slicknav.min.css')}}" type="text/css">
+<link rel="stylesheet" href="{{asset('customer/css/style.css')}}" type="text/css">

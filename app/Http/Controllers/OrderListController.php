@@ -54,7 +54,7 @@ class OrderListController extends Controller
 
         $id = $request->od_box_id;
 
-        $set_data = Order::with('item')->get();
+        $set_data = Order::where('customer_id', $request->customer_id)->with('item')->get();
         $data = (string) $set_data;
 
         $order_data = [
@@ -66,6 +66,7 @@ class OrderListController extends Controller
             'status' => $request->status,
             'created_on' => time()
         ];
+
         
         if($id != null or $id != '')
         {   
@@ -74,7 +75,19 @@ class OrderListController extends Controller
         else 
         {
             $order_list   =   OrderList::create($order_data);  
+            
+            foreach($set_data as $data){
+
+                $item = Item::where('item_id', $data->item_id)->first();
+                $stock = $item->stock_amount;
+    
+                Item::where('item_id', $data->item_id)->update([
+                    'stock_amount' => $stock - $data->item_count
+                ]);
+            }
         }
+
+        Order::where('customer_id', $request->customer_id)->delete();
                 
         return redirect('/order');
     }

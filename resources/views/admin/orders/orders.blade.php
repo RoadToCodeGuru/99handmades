@@ -35,12 +35,15 @@
                         <div class="card">
                             <div class="card-body">
                                 @if($type == 'create')
-                                <h4 class="card-title">Creating New Order</h4>
+                                <h4 class="card-title">Creating the order of " {{$cus_info->customer_name}} "</h4>
+                                <input type="hidden" value="0" name="action" id="action">
                                 @elseif($type == 'edit')
-                                <h4 class="card-title">Editing Order ID: {{ $o_id }}</h4>
+                                <h4 class="card-title">Editing  " {{$cus_info->customer_name}} "s order</h4>
+                                <input type="hidden" value="1" name="action" id="action">
                                 @endif
                                 <h6 class="card-subtitle">order items</h6>
-                                <a href="javascript:void(0)" id="create-new-box" class="btn btn-outline-success btn-rounded float-right" data-toggle="modal" data-target="#create-box" data-whatever="@mdo"><i class="ti-plus pr-1"></i>Add Item</a>
+                                <a href="javascript:void(0)" id="create-new-box" class="btn btn-outline-success btn-rounded" data-toggle="modal" data-target="#create-box" data-whatever="@mdo"><i class="ti-plus pr-1"></i>Add Item</a>
+                                <a href="/order" class="btn btn-sm  mb-2 btn-secondary btn-rounded float-right">Back To Order List >></a>
                                 <div class="table-responsive m-t-40">
                                     <table id="laravel_datatable" class="table w-100 table-bordered table-striped">
                                         <thead>
@@ -49,7 +52,7 @@
                                                 <th>Name</th>
                                                 <th>Image</th>
                                                 <th>Sale-P</th>
-                                                <th>Amount</th>
+                                                <th>Quantity</th>
                                                 <th>Discount</th>
                                                 <th>Final-P</th>
                                                 <th>Action</th>
@@ -57,13 +60,12 @@
                                         </thead>
                                         <tfoot>
                                             @if($type == 'create')
-                                            <a href="javascript:void(0)" id="make_order" class="btn btn-sm mt-4 mb-2 btn-primary btn-rounded  float-right" data-toggle="modal" data-whatever="@mdo">Order Now</a>
-                                            <a href="javascript:void(0)" id="import_set" class="btn btn-sm mt-4 mb-2 btn-success btn-rounded mr-2" data-toggle="modal" data-whatever="@mdo">Clone Item Set</a>
+                                            <a href="javascript:void(0)" id="make_order" class="btn mb-2 btn-primary btn-rounded  float-right" data-toggle="modal" data-whatever="@mdo">Order Now</a>
+                                            <!-- <a href="javascript:void(0)" id="import_set" class="btn btn-sm mt-4 mb-2 btn-success btn-rounded mr-2" data-toggle="modal" data-whatever="@mdo">Clone Item Set</a> -->
                                             @elseif($type == 'edit')
-                                            <a href="javascript:void(0)" id="update_order" class="btn btn-sm mt-4 mb-2 btn-info btn-rounded mr-2  float-right" data-id="{{ $o_id }}" data-toggle="modal" data-whatever="@mdo">Update Order</a>
+                                            <a href="javascript:void(0)" id="update_order" class="btn mb-2 btn-info btn-rounded mr-2  float-right" data-id="{{ $o_id }}" data-toggle="modal" data-whatever="@mdo">Update Order</a>
                                             @endif
-                                            <a href="javascript:void(0)" id="empty_set" class="btn btn-sm mt-4 mb-2 btn-danger btn-rounded mr-2" data-toggle="modal" data-whatever="@mdo">Empty</a>
-                                            <a href="/order" class="btn btn-sm mt-4 mb-2 btn-secondary btn-rounded">Back To Order List >></a>
+                                            <!-- <a href="javascript:void(0)" id="empty_set" class="btn btn-sm mt-4 mb-2 btn-danger btn-rounded mr-2" data-toggle="modal" data-whatever="@mdo">Empty</a> -->
                                             <h5 class="mt-4" id="sub_total"></h5>
                                         </tfoot>
                                     </table>
@@ -86,6 +88,7 @@
                                 <form id="boxForm" name="boxForm" class="form-horizontal">
 
                                     <input type="hidden" name="box_id" id="box_id">
+                                    <input type="hidden" value="{{$cus_info->id}}" name="customer_o_id" id="customer_o_id">
 
                                     <div class="form-group">
                                         <label for="item_id" class="col-sm-4 control-label">Items</label>
@@ -142,17 +145,7 @@
                                 @csrf
                                     <input type="hidden" name="od_box_id" id="od_box_id">
 
-                                    <div class="form-group">
-                                        <label for="item_id" class="col-sm-4 control-label">Customer</label>
-                                        <div class="col-sm-12">
-                                            <select class="form-control select2" name="customer_id" id="customer_id" style="width: 100%">
-                                                @foreach($customers as $customer)
-                                                <option value="{{$customer->id}}">{{ $customer->customer_name }}</option>
-                                                @endforeach
-                                            </select>
-                                            <span class="text-danger error-tags customer_name-error"></span>
-                                        </div>
-                                    </div>
+                                    <input type="hidden" value="{{$cus_info->id}}" name="customer_id" id="customer_id">
 
                                     <div class="form-group">
                                         <label for="note" class="col-sm-4 control-label">Note</label>
@@ -258,6 +251,7 @@ function sum_subtotal(){
 
 var SITEURL = '{{URL::to('')}}';
 var error_reset = $('.error-tags');
+let cus_id = $('#customer_id').val();
 
 $(document).ready( function () {
     $.ajaxSetup({
@@ -270,6 +264,7 @@ $(document).ready( function () {
         processing: true,
         serverSide: true,
         ajax: {
+        data: {customer_id : cus_id},    
         url: SITEURL + "/order_box",
         type: 'GET',
         },
@@ -317,7 +312,6 @@ $(document).ready( function () {
         $('#btn-od_box').text("Order");
         $('#od_boxForm').trigger("reset");
         $('#od_box_id').val('');
-        $('#customer_id').val('').change();
         $('#total_discount').val('0');  
         $('#od_boxCrudModal').text("New Order");
         $('#ajax-od_box-modal').modal('show');

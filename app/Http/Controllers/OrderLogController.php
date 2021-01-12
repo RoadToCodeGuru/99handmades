@@ -30,7 +30,22 @@ class OrderLogController extends Controller
 
     public function delete(Request $request)
     {
-        OrderList::where('order_id', $request->id)->delete();
+        $id = $request->id;
+        // get the order list with customer_id
+        $order_list  = OrderList::where('order_id',$id)->first();
+
+        $order_datas =  json_decode($order_list->order_data, true);
+        foreach($order_datas as $data){
+
+            $item = Item::where('item_id', $data['item_id'])->first();
+            $stock = $item->stock_amount;
+
+            Item::where('item_id', $data['item_id'])->update([
+                'stock_amount' => $stock + $data['item_count']
+            ]);
+        }
+
+        OrderList::where('order_id', $id)->delete();
 
         return redirect('/order');
     }

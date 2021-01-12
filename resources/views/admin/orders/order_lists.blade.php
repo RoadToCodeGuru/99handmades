@@ -67,7 +67,48 @@
                             </div>
                             <div class="modal-body">
                                 <form action='/order_box' id="orderForm" name="orderForm" class="form-horizontal">
+                                    <input type="hidden" name="ordering_customer" id="ordering_customer">
                                     <input type="hidden" name="order_id" id="order_id">
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal fade" id="ajax-od_box-modal" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title" id="od_boxCrudModal"></h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/create_order" method="POST" id="od_boxForm" name="od_boxForm" class="form-horizontal">
+                                @csrf
+                                    <input type="hidden" name="od_box_id" id="od_box_id">
+
+                                    <div class="form-group">
+                                        <label for="item_id" class="col-sm-4 control-label">Customer</label>
+                                        <div class="col-sm-12">
+                                            <select class="form-control select2" name="customer_id" id="customer_id" style="width: 100%">
+                                                @foreach($customers as $customer)
+                                                <option value="{{$customer->id}}">{{ $customer->customer_name }}</option>
+                                                @endforeach
+                                            </select>
+                                            <span class="text-danger error-tags customer_name-error"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                   
+                                    <a href="javascript:void(0)" id="btn-od_box" class="btn btn-primary" >Create Order</a>
+                                    </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
@@ -132,15 +173,32 @@ $(document).ready( function () {
     });
  
  /*  When order click add order button */
+    $('#btn-od_box').click(function () {
+        let c_id = $('#customer_id').val()
+
+        error_reset.html('');
+        $('#ordering_customer').val(c_id);
+        $('#order_id').val('');
+        $('#ajax-od_box-modal').modal('hide');
+        $('#orderForm').submit();
+    });
+
     $('#create-new-order').click(function () {
         error_reset.html('');
-        $('#order_id').val('');
-        $('#orderForm').submit();
+        $('#btn-od_box').text("Create Order");
+        $('#od_boxForm').trigger("reset");
+        $('#od_box_id').val('');
+        $('#customer_id').val('').change();
+        $('#total_discount').val('0');  
+        $('#od_boxCrudModal').text("New Order");
+        $('#ajax-od_box-modal').modal('show');
     });
   
    /* When click edit customer */
     $('body').on('click', '#edit-order', function () {
       var _id = $(this).data('id');
+      var _cid = $(this).data('id2');
+      $('#ordering_customer').val(_cid);
       $('#order_id').val(_id);
       $('#orderForm').submit();
    });

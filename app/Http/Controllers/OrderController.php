@@ -14,18 +14,21 @@ class OrderController extends Controller
 {
     public function index(Request $request)
     {
-        if($request->order_id == ''){
+        $cus_info = Customer::where('id', $request->ordering_customer)->first();
+
+        if($request->order_id == '' || $request->order_id == null){
             $type = 'create';
             $o_id = '';
         }else{
             $box = OrderList::where('order_id', $request->order_id)->first();
             $datas = json_decode($box->order_data, true);
 
-            Order::truncate();
+            Order::where('customer_id', $request->ordering_customer)->delete();
 
             foreach($datas as $data){
                 Order::create([
                     'item_id' => $data['item_id'],
+                    'customer_id' => $data['customer_id'],
                     'item_count' => $data['item_count'],
                     'discount' => $data['discount'],
                     'final_price' => $data['final_price']
@@ -35,9 +38,10 @@ class OrderController extends Controller
             $type = 'edit';
             $o_id = $request->order_id;
         }
+        
 
         if(request()->ajax()) {
-            return datatables()->of(Order::with('item')->select('*'))
+            return datatables()->of(Order::where('customer_id', $request->customer_id)->with('item')->select('*'))
             ->addColumn('action', 'admin.orders.orders_action')
             ->rawColumns(['action'])
             ->addIndexColumn()
@@ -49,7 +53,7 @@ class OrderController extends Controller
 
         $customers = Customer::get(['id', 'customer_name']);
 
-        return view('admin.orders.orders', compact('type', 'o_id', 'items', 'item_sets', 'customers'));
+        return view('admin.orders.orders', compact('type', 'o_id', 'cus_info', 'items', 'item_sets', 'customers'));
     }
 
     /**
@@ -73,6 +77,7 @@ class OrderController extends Controller
         if($id != null or $id != '')
         {   
             $order   =   Order::where('id', $id)->update([
+                'customer_id' => $request->customer_o_id,
                 'item_id' => $request->item_id,
                 'item_count' => $request->amount,
                 'discount' => $request->discount,
@@ -82,6 +87,7 @@ class OrderController extends Controller
         else 
         {
             $order   =   Order::create([
+                'customer_id' => $request->customer_o_id,
                 'item_id' => $request->item_id,
                 'item_count' => $request->amount,
                 'discount' => $request->discount,

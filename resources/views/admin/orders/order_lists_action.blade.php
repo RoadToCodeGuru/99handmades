@@ -1,5 +1,5 @@
 <div class="row butt">
-<a href="javascript:void(0)" data-toggle="tooltip" id="edit-order" data-id="{{ $order_id }}" data-original-title="Edit" class="btn btn-success edit mr-2">
+<a href="javascript:void(0)" data-toggle="tooltip" id="edit-order" data-id2="{{ $customer_id }}" data-id="{{ $order_id }}" data-original-title="Edit" class="btn btn-success edit mr-2">
     <i class="mdi mdi-lead-pencil"></i>
 </a>
 

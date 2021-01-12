@@ -11,7 +11,7 @@ class ContentController extends Controller
 {
     public function content()
     {
-        $items = Item::paginate(4);
+        $items = Item::get();
         return view('customer.content', compact('items'));
     }
 }

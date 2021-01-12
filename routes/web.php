@@ -30,14 +30,16 @@ Route::get('/', function () {
     return redirect('/item');
 });
 
-Route::get('/invoice_test', function () {
-    return view('invoice_test');
+Route::get('/content_test', function () {
+    return view('customer.test');
 });
 
 
 Route::get('/cart_test', function () {
     return view('customer.cart');
 });
+
+Route::get('content', [ContentController::class, 'content']);
 
 Route::get('/order_detail', function () {
     return view('admin.details.order_detail');
