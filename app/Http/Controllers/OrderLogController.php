@@ -77,14 +77,6 @@ class OrderLogController extends Controller
                 'created_on' => $time
             ]);
 
-            $item = Item::where('item_id', $data['item_id'])->first();
-            $stock = $item->stock_amount;
-
-            Item::where('item_id', $data['item_id'])->update([
-                'stock_amount' => $stock - $data['item_count']
-            ]);
-            
-
             $c_p[] = $data['item']['actual_price'] * $data['item_count'];
             $f_p[] = $data['final_price'];
         }
