@@ -52,7 +52,6 @@ class OrderLogController extends Controller
 
     public function e_delete($id)
     {
-        $id = $request->id;
 
         OrderList::where('order_id', $id)->delete();
 
