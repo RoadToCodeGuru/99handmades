@@ -96,7 +96,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('completed_sales', [OrderListController::class, 'sale']);
     Route::get('order/{id}', [OrderListController::class, 'edit']);
     Route::post('create_order', [OrderListController::class, 'store']);
-    Route::post('delete_order', [OrderListController::class, 'destroy']);
+    
 
     Route::get('detail_order/{id}', [OrderListController::class, 'detail']);
     Route::get('invoice_order/{id}', [OrderListController::class, 'invoice']);
@@ -115,4 +115,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('status_change', [OrderLogController::class, 'status']);
     Route::post('complete_order', [OrderLogController::class, 'complete']);
     Route::get('delete_order/{id}', [OrderLogController::class, 'delete']);
+    Route::get('emergency_deleting_order_by_admin/{id}', [OrderLogController::class, 'e_delete']);
 });

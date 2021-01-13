@@ -50,6 +50,15 @@ class OrderLogController extends Controller
         return redirect('/order');
     }
 
+    public function e_delete($id)
+    {
+        $id = $request->id;
+
+        OrderList::where('order_id', $id)->delete();
+
+        return redirect('/order');
+    }
+
     public function complete(Request $request)
     {
         $id = $request->id;
