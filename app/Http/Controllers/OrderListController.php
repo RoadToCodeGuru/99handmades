@@ -181,15 +181,24 @@ class OrderListController extends Controller
         $date = date("d.m.Y", $order_list->created_on);
         $order_datas =  json_decode($order_list->order_data, true);
 
+        $no= 1;
         foreach($order_datas as $data){
             $f_p[] = $data['final_price'];
+            $i_datas[] = [
+                'no' => $no,
+                'item_name' => $data['item']['item_name'],
+                'unit_price' => $data['item']['sale_price'] - $data['discount'],
+                'item_count' => $data['item_count'],
+                'final_price' => $data['final_price']
+            ];
+            $no ++;
         }
 
         $sub_total = array_sum($f_p);
 
         $total = ($sub_total + $order_list->deli_price ) - $order_list->total_discount;
 
-        return view('admin.itemsets.invoice', compact('order_list', 'order_datas', 'sub_total', 'total', 'date'));
+        return view('admin.itemsets.invoice', compact('order_list', 'i_datas', 'sub_total', 'total', 'date'));
     }
 
     public function phcover(){
