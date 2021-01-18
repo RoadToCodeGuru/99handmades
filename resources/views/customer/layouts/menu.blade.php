@@ -10,7 +10,7 @@
                     </div>
                     <ul  style="overflow-y: auto; max-height: 500px;">
                         @foreach($sub_dc->sub_categories as $dc)
-                            <li><a href="content/{{ $dc->id }}">{{ $dc->sub_category_name }}</a></li>
+                            <li><a href="/content/{{ $dc->id }}">{{ $dc->sub_category_name }}</a></li>
                         @endforeach
                     </ul>
                 </div>
@@ -23,7 +23,7 @@
                     </div>
                     <ul  style="overflow-y: auto; max-height: 500px;">
                         @foreach($sub_rs->sub_categories as $rs)
-                            <li><a href="content/{{ $rs->id }}">{{ $rs->sub_category_name }}</a></li>
+                            <li><a href="/content/{{ $rs->id }}">{{ $rs->sub_category_name }}</a></li>
                         @endforeach    
                     </ul>
                 </div>
