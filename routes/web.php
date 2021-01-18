@@ -40,6 +40,7 @@ Route::get('/cart_test', function () {
 });
 
 Route::get('content', [ContentController::class, 'content']);
+Route::get('content/{sub}', [ContentController::class, 'choose_content']);
 
 Route::get('/order_detail', function () {
     return view('admin.details.order_detail');

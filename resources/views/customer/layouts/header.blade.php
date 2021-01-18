@@ -6,7 +6,7 @@
                 <div class="col-lg-6">
                     <div class="header__top__left">
                         <ul>
-                            <li><i class="fa fa-envelope"></i> drzymh.mu.zzzz@gmail.com</li>
+                            <li><i class="fa fa-envelope"></i> shoonleyati2017@gmail.com</li>
                             <!-- <li>Free Shipping for all Order of $99</li> -->
                         </ul>
                     </div>
@@ -28,9 +28,9 @@
                                 <li><a href="#">English</a></li>
                             </ul>
                         </div> -->
-                        <div class="header__top__right__auth">
+                        <!-- <div class="header__top__right__auth">
                             <a href="#"><i class="fa fa-user"></i> Login</a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -38,12 +38,13 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <div class="header__logo">
+                    <a href="#"><img src="{{URL('theme/assets/images/users/99handmade.png')}}" class="mr-2 logo_my_style"></a>
                     <a href="./index.html" class="mt-3"><h6><strong>99 HANDMADES & ACCESSORIES</strong></h6></a>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-5">
                 <nav class="header__menu">
                     <ul>
                         <!-- <li><a href="./index.html">Home</a></li> -->
@@ -62,13 +63,13 @@
                 </nav>
             </div>
             <div class="col-lg-3">
-                <div class="header__cart">
+                <!-- <div class="header__cart">
                     <ul>
-                        <!-- <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li> -->
+                        <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
                         <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                     </ul>
                     <div class="header__cart__price">item: <span>$150.00</span></div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="humberger__open">
