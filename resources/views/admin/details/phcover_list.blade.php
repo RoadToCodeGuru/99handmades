@@ -16,6 +16,7 @@
         font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
         color: #555;
         position: relative;
+        background: white;
     }
     
     .invoice-box table {
