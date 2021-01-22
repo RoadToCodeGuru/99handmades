@@ -171,7 +171,7 @@
         <p>*** Phone cover များ တွင် အလားတူ အမျိုးစား များ ကို မျဉ်းစောင်းလေး များခံ၍ ရေးပေးထါးကြောင်း သတိပြုစေလိုပါသည်</p>
     </div>
     <a href="/order" class="back-button">back</a>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.2/dist/FileSaver.min.js"></script>
 
@@ -183,6 +183,6 @@
             // location.href = '/';
         })
         });
-    </script> -->
+    </script>
 </body>
 </html>
