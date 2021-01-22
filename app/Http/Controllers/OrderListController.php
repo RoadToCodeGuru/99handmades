@@ -201,8 +201,22 @@ class OrderListController extends Controller
         return view('admin.itemsets.invoice', compact('order_list', 'i_datas', 'sub_total', 'total', 'date'));
     }
 
-    public function phcover(){
-        $sc = SubCategory::where('sub_category_name', 'Ph cover')->first();
+    public function phcover($type){
+        if($type == 'iph'){
+            $sc = SubCategory::where('sub_category_name', 'I Phone Cover')->first();
+        }else if($type == 'ss'){
+            $sc = SubCategory::where('sub_category_name', 'Samsung Cover')->first();
+        }else if($type == 'mi'){
+            $sc = SubCategory::where('sub_category_name', 'Mi & Redmi Cover')->first();
+        }else if($type == 'vivo'){
+            $sc = SubCategory::where('sub_category_name', 'Vivo Cover')->first();
+        }else if($type == 'oppo'){
+            $sc = SubCategory::where('sub_category_name', 'Oppo & Realme Cover')->first();
+        }else if($type == 'hua'){
+            $sc = SubCategory::where('sub_category_name', 'Huawei & Honor Cover')->first();
+        }
+
+        
         $covers = Item::where('subcategory_id', $sc->id)->where('stock_amount','>', 0)->get();
 
         return view('admin.details.phcover_list', compact('covers'));

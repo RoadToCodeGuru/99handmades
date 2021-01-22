@@ -19,7 +19,9 @@ class ContentController extends Controller
       
         $sub_rs = Category::where('category_name', 'Resin')->with('sub_categories')->first();
 
-        return view('customer.content', compact('items', 'sub_dc', 'sub_rs'));
+        $header = 'Latest';
+
+        return view('customer.content', compact('items', 'sub_dc', 'sub_rs', 'header'));
     }
 
 
@@ -27,10 +29,13 @@ class ContentController extends Controller
     {
         $items = Item::where('subcategory_id', $sub)->latest()->get();
 
+        $sub_c = SubCategory::where('id', $sub)->first();
+        $header = $sub_c->sub_category_name;
+
         $sub_dc = Category::where('category_name', 'Dream Catcher')->with('sub_categories')->first();
       
         $sub_rs = Category::where('category_name', 'Resin')->with('sub_categories')->first();
 
-        return view('customer.content', compact('items', 'sub_dc', 'sub_rs'));
+        return view('customer.content', compact('items', 'sub_dc', 'sub_rs', 'header'));
     }
 }

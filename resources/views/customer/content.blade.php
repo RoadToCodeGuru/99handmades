@@ -91,6 +91,9 @@
                             </div>
                         </div>
                     </div> -->
+                    <div class="row ml-1 mb-3">
+                        <h2><strong>{{ $header }}</strong></h2>
+                    </div>
                     <div class="row">
                         @foreach($items as $item)
                         <div class="col-lg-4 col-md-4 col-sm-6 col-6">
@@ -98,7 +101,7 @@
                                 <div class="product__item__pic set-bg" data-setbg="{{asset('images/'. $item->item_image)}}">
                                     <ul class="product__item__pic__hover">
                                         <!-- <li><a href="#"><i class="fa fa-heart"></i></a></li> -->
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-inbox"></i></a></li>
                                         <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>

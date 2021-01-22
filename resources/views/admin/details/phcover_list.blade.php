@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title>99handmades Invoice</title>
+
+    <link rel="stylesheet" href="{{asset('customer/css/bootstrap.min.css')}}" type="text/css">
     
     <style>
     .invoice-box {
@@ -14,8 +16,6 @@
         font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
         color: #555;
         position: relative;
-        background: url('/theme/assets/images/users/background.jpg') no-repeat center fixed;
-        background-size: cover;
     }
     
     .invoice-box table {
@@ -156,9 +156,11 @@
            
             <tr class="item">
                 <td>
-                    <div id="flex_box">
+                    <div class="row">
                         @foreach($covers as $cover)
+                        <div class="col-4">
                             <div style="margin: 20px">{{$cover->item_name}}</div>
+                        </div>
                         @endforeach
                     </div>
                 </td>
@@ -169,7 +171,7 @@
         <p>*** Phone cover များ တွင် အလားတူ အမျိုးစား များ ကို မျဉ်းစောင်းလေး များခံ၍ ရေးပေးထါးကြောင်း သတိပြုစေလိုပါသည်</p>
     </div>
     <a href="/order" class="back-button">back</a>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.2/dist/FileSaver.min.js"></script>
 
@@ -181,6 +183,6 @@
             // location.href = '/';
         })
         });
-    </script>
+    </script> -->
 </body>
 </html>
