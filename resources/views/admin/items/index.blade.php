@@ -47,6 +47,7 @@
                                                 <th>Base P</th>
                                                 <th>Sale P</th>
                                                 <th>Stock Amount</th>
+                                                <th>Checked</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -134,7 +135,7 @@
                                     <div class="form-group col-md-6 ">
                                         <div class="form-check">
                                             <input type="checkbox" id="instock" name="instock" value="0"/>
-                                            <label for="instock">Out Of Stock</label>
+                                            <label for="instock">Stock Checked</label>
                                         </div>                             
                                     </div>
 
@@ -187,6 +188,17 @@ $(document).ready( function () {
                   {data: 'actual_price' , name: 'actual_price'},
                   {data: 'sale_price' , name: 'sale_price'},
                   {data: 'stock_amount' , name: 'stock_amount'},
+                  { data: 'instock',
+                    render: function (data) {
+                        if(data == 0)
+                        {
+                            return '<div class="label label-success">Checked</div>'
+                        }
+                        else if(data == 1)
+                        {
+                            return '<div class="label label-danger">No</div>'
+                        }
+                    } },
                   {data: 'action', name: 'action', orderable: false},
          ],
         order: [[0, 'desc']],

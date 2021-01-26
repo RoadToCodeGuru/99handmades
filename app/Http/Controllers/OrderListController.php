@@ -216,7 +216,6 @@ class OrderListController extends Controller
             $sc = SubCategory::where('sub_category_name', 'Huawei & Honor Cover')->first();
         }
 
-        
         $covers = Item::where('subcategory_id', $sc->id)->where('stock_amount','>', 0)->get();
 
         return view('admin.details.phcover_list', compact('covers'));
