@@ -39,8 +39,12 @@ Route::get('/cart_test', function () {
     return view('customer.cart');
 });
 
+
+
 Route::get('content', [ContentController::class, 'content']);
 Route::get('content/{sub}', [ContentController::class, 'choose_content']);
+
+Route::get('detail/{id}', [ContentController::class, 'detail']);
 
 Route::get('/order_detail', function () {
     return view('admin.details.order_detail');
@@ -52,6 +56,7 @@ Route::get('/order_detail', function () {
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     //items
     Route::get('item', [ItemController::class, 'index']);
+    Route::get('give_capital', [ItemController::class, 'give_capital']);
     Route::get('item/{id}', [ItemController::class, 'edit']);
     Route::post('create_item', [ItemController::class, 'store']);
     Route::post('delete_item', [ItemController::class, 'destroy']);

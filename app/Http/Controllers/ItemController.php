@@ -122,4 +122,25 @@ class ItemController extends Controller
         return Response::json($item);
         
     }
+
+    public function give_capital()
+    {
+        $items = Item::where('stock_amount', '>', 0)->get();
+    
+
+        $cap_items = array();
+
+        foreach($items as $item) 
+        {
+            $cap_items[] = $item->actual_price * $item->stock_amount;
+            $sale_items[] = $item->sale_price * $item->stock_amount;
+        }
+
+        $report = [
+            'capital' => array_sum($cap_items),
+            'sale' => array_sum($sale_items)
+        ];
+        
+        return $report;
+    }
 }
