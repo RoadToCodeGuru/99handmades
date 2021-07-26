@@ -117,6 +117,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('import_order_box', [OrderController::class, 'import']);
     Route::post('empty_order_box', [OrderController::class, 'empty']);
 
+    //get profit by month
+    Route::get('profit_bm/{month}', [OrderController::class, 'profit_bm']);
+
     // status and logs
     Route::post('status_change', [OrderLogController::class, 'status']);
     Route::post('complete_order', [OrderLogController::class, 'complete']);

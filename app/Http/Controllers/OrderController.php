@@ -9,6 +9,7 @@ use App\Models\Item;
 use App\Models\ItemSet;
 use App\Models\Customer;
 use App\Models\OrderList;
+use App\Models\SaleProfit;
 
 class OrderController extends Controller
 {
@@ -158,5 +159,34 @@ class OrderController extends Controller
         Order::truncate();
         $order = Order::get();
         return Response::json($order);
+    }
+
+    public function profit_bm($month)
+    {
+        $data = explode('-', $month);
+        
+        $year= $data[0];
+        $nextmonth = $data[1] + 1;
+
+        $frist_date = new \DateTime( $month.'-1');
+
+        $last_date = new \DateTime( $year.'-'.$nextmonth.'-1');
+
+        $sales = SaleProfit::whereBetween('created_on', [$frist_date->getTimestamp(), $last_date->getTimestamp()])->get();
+
+        foreach($sales as $sale) 
+        {
+            $capital_price[] = $sale->total_capital_price;
+            $total_price[] = $sale->subtotal_price;
+            $profit[] = $sale->profit;
+        }
+
+        $report = [
+            'total' => array_sum($total_price),
+            'capital' => array_sum($capital_price),
+            'profit' => array_sum($profit)
+        ];
+        
+        return $report;
     }
 }
