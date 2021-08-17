@@ -166,7 +166,17 @@ class OrderController extends Controller
         $data = explode('-', $month);
         
         $year= $data[0];
-        $nextmonth = $data[1] + 1;
+        
+        
+
+        if($data[1] == 12)
+        {
+            $nextmonth = 1;
+            $year = $year + 1;
+        }else
+        {
+            $nextmonth = $data[1] + 1;
+        }
 
         $frist_date = new \DateTime( $month.'-1');
 
