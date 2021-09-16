@@ -198,7 +198,7 @@ class OrderListController extends Controller
 
         $total = ($sub_total + $order_list->deli_price ) - $order_list->total_discount;
 
-        return view('admin.itemsets.invoice', compact('order_list', 'i_datas', 'sub_total', 'total', 'date'));
+        return view('admin.itemsets.stpinvoice', compact('order_list', 'i_datas', 'sub_total', 'total', 'date'));
     }
 
     public function phcover($type){
